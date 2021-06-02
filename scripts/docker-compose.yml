@@ -1,0 +1,31 @@
+version: '3.7'
+
+services:
+  lume-test:
+    #image: jesusvasquez333/lume-test
+    image: lume-test
+    container_name: lume-test
+    tty: true
+    stdin_open: true
+    volumes:
+      - type: volume
+        source: data-volume
+        target: /output
+
+  sftp-server:
+    image: atmoz/sftp
+    container_name: sftp-server
+    volumes:
+      - type: volume
+        source: data-volume
+        target: /home/test/lume
+    ports:
+      - target: 22
+        published: 2222
+        protocol: tcp
+        mode: host
+    command: test:test:::lume
+
+volumes:
+  data-volume:
+    name: lume-data-volume
