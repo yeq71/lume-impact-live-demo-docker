@@ -37,8 +37,6 @@ jobs:
       # Build and push the docker image
       - name: Build and push image to Dockerhub
         uses: docker/build-push-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.SLACLAB_TOKEN }}
         with:
           context: ./docker
           file: ./docker/Dockerfile
