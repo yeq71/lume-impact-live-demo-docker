@@ -42,6 +42,5 @@ jobs:
           file: ./docker/Dockerfile
           push: true
           tags: tidair/lume-impact-live-demo:${{ steps.get_tag.outputs.tag }}
-          build-args: branch=${{ steps.get_tag.outputs.tag }}
           secrets: |
             GIT_AUTH_TOKEN=${{ secrets.SLACLAB_TOKEN }}
