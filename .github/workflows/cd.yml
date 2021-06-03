@@ -13,11 +13,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # Use ssh key authentication to be able to access other private
-      # repositories.
-      - uses: webfactory/ssh-agent@v0.5.2
+      # Checkout the LCLS lattice repository. This is a private
+      # repository, so we need to use the SLACLAB token.
+      # We clone the repository inside the 'docker' directory; the
+      # Dockerfile needs it there to add it to the docker image.
+      - name: Checkout LCLS lattice
+        uses: actions/checkout@v2
         with:
-          ssh-private-key: ${{ secrets.SLACLAB_KEY }}
+          repository: slaclab/lcls-lattice.git
+          token: ${{ secrets.SLACLAB_TOKEN }}
+          path: docker/lcls-lattice
 
       # Get the git tag from the environmental variables
       # It will used to tag the docker image
@@ -39,8 +44,6 @@ jobs:
       # Build and push the docker image
       - name: Build and push image to Dockerhub
         uses: docker/build-push-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.SLACLAB_TOKEN }}
         with:
           context: ./docker
           file: ./docker/Dockerfile
