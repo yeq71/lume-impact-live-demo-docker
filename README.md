@@ -28,9 +28,16 @@ The Docker image needs two github repositories:
 
 Am example [docker-compose.yml](scripts/docker-compose.yml) in provided in this repository. This file defines 2 services:
 - The `lume-impact-live-demo` application which runs live models and produce output files,
-- A `SFTP` server which allow to access the output files from the `lume-impact-live-demo` service above, as an example on how to access the output data.
+- A `SFTP` server which allow to access the output files from the `lume-impact-live-demo` service above, as an example on how to access the output data. The server uses the port `2222`, username `test`, and password `test`.
 
 Also, the `docker-compose.yml` file defines a data volume where the `lume-impact-live-demo` data is saved. The `SFTP` access the data from this volume as well.
+
+You can run this example with this command:
+```bash
+docker-compose up -d
+```
+
+Once all the services are up and running, you can open a `SFTP` session to `hostname:2222` (where `hostname` is the node name or IP address of the host where you are running the containers), and use username `test` and password `test` to access the output files.
 
 ## Running only the Docker container:
 
