@@ -40,6 +40,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.SLACLAB_TOKEN }}
         run: |
+          git clone git@github.com:slaclab/lcls-lattice.git && \
           cd docker && \
           docker image build -t tidair/lume-impact-live-demo .
 
