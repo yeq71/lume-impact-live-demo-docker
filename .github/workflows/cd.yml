@@ -22,7 +22,7 @@ jobs:
         with:
           repository: slaclab/lcls-lattice
           token: ${{ secrets.SLACLAB_TOKEN }}
-          path: docker
+          path: docker/lcls-lattice
 
       # Get the git tag from the environmental variables
       # It will used to tag the docker image
