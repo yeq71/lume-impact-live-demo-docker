@@ -14,8 +14,10 @@ jobs:
       # repositories.
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - uses: webfactory/ssh-agent@v0.5.2
         with:
-          ssh-key: ${{ secrets.SLACLAB_KEY }}
+          ssh-private-key: ${{ secrets.SLACLAB_KEY }}
 
       # Get the git tag from the environmental variables
       # It will used to tag the docker image
