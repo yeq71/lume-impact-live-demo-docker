@@ -40,10 +40,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.SLACLAB_TOKEN }}
         run: |
-          echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config && \
+          ssh-keyscan github.com > ./known_hosts \
           git clone git@github.com:slaclab/lcls-lattice.git && \
           cd docker && \
-          docker image build -t tidair/lume-impact-live-demo .
+          docker image build -t tidair/lume-impact-live-demo . && \
+          cd -
 
       # Build and push the docker image
       - name: Build and push image to Dockerhub
