@@ -39,7 +39,9 @@ jobs:
       - name: Test private clone
         env:
           GITHUB_TOKEN: ${{ secrets.SLACLAB_TOKEN }}
-        run: git clone git@github.com:slaclab/lcls-lattice.git
+        run: |
+          cd docker && \
+          docker image build -t tidair/lume-impact-live-demo .
 
       # Build and push the docker image
       - name: Build and push image to Dockerhub
@@ -51,5 +53,5 @@ jobs:
           file: ./docker/Dockerfile
           push: true
           tags: tidair/lume-impact-live-demo:${{ steps.get_tag.outputs.tag }}
-          secrets: |
-            GIT_AUTH_TOKEN=${{ secrets.SLACLAB_TOKEN }}
+          # secrets: |
+          #   GIT_AUTH_TOKEN=${{ secrets.SLACLAB_TOKEN }}
