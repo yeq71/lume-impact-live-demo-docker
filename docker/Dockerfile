@@ -1,8 +1,8 @@
 FROM continuumio/miniconda3:4.9.2
 
 # Get a copy of the lcls-lattice repository, and point
-# the 'LCLS_LATTICE' environmental variable to it
-RUN git clone git@github.com:slaclab/lcls-lattice.git
+# the 'LCLS_LATTICE' enviromental variable to it
+COPY ./lcls-lattice /lcls-lattice
 ENV LCLS_LATTICE /lcls-lattice
 
 # Clone the repository and create the 'lume-test' conda environment
