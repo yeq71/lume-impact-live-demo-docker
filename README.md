@@ -18,7 +18,7 @@ When a tag is pushed to this GitHub repository, a Docker image is automatically 
 
 The Docker image needs two github repositories:
 - [lume-impact-live-demo](https://github.com/ChristopherMayes/lume-impact-live-demo): this is a public repository and it is cloned in the [Dockerfile](docker/Dockerfile), and
-- [lcls-lattice](https://github.com/slaclab/lcls-lattice): this is private repository and it is cloned in the Github Action script inside the [docker](docker) directory; the [Dockerfile](docker/Dokerfile) copies it to the Docker image from there.
+- [lcls-lattice](https://github.com/slaclab/lcls-lattice): this is private repository and it is cloned in the Github Action script inside the [docker](docker) directory; the [Dockerfile](docker/Dockerfile) copies it to the Docker image from there.
 
 **Note:** If you want to build this image manually, you will need to provide a copy of the [lcls-lattice](https://github.com/slaclab/lcls-lattice) in the [docker](docker) directory.
 
