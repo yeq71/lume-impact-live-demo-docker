@@ -37,7 +37,7 @@ jobs:
       - name: Test private clone
         env:
           GITHUB_TOKEN: ${{ secrets.SLACLAB_TOKEN }}
-        run: git clone git@github.com:slaclab/lcls-lattice.git
+        run: ssh -vT git@github.com
 
       # Build and push the docker image
       # - name: Build and push image to Dockerhub
