@@ -20,9 +20,9 @@ jobs:
       - name: Checkout LCLS lattice
         uses: actions/checkout@v2
         with:
-          repository: slaclab/lcls-lattice.git
+          repository: slaclab/lcls-lattice
           token: ${{ secrets.SLACLAB_TOKEN }}
-          path: docker/lcls-lattice
+          path: docker
 
       # Get the git tag from the environmental variables
       # It will used to tag the docker image
