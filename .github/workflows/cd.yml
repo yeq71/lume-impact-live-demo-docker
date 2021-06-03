@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Checkout the code.
-      # We use ssh key authentication to be able to access other private
-      # repositories.
       - name: Checkout code
         uses: actions/checkout@v2
 
+      # Use ssh key authentication to be able to access other private
+      # repositories.
       - uses: webfactory/ssh-agent@v0.5.2
         with:
           ssh-private-key: ${{ secrets.SLACLAB_KEY }}
@@ -36,16 +36,11 @@ jobs:
           username: tidair
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Test private clone
-        env:
-          GITHUB_TOKEN: ${{ secrets.SLACLAB_TOKEN }}
-        run: git clone git@github.com:slaclab/lcls-lattice.git
-
       # Build and push the docker image
-      # - name: Build and push image to Dockerhub
-      #   uses: docker/build-push-action@v2
-      #   with:
-      #     context: ./docker
-      #     file: ./docker/Dockerfile
-      #     push: true
-      #     tags: tidair/lume-impact-live-demo:${{ steps.get_tag.outputs.tag }}
+      - name: Build and push image to Dockerhub
+        uses: docker/build-push-action@v2
+        with:
+          context: ./docker
+          file: ./docker/Dockerfile
+          push: true
+          tags: tidair/lume-impact-live-demo:${{ steps.get_tag.outputs.tag }}
