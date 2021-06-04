@@ -85,7 +85,7 @@ RUN jupyter nbconvert --to script lume-impact-live-demo.ipynb && \
 # Modify the top level python script to write the output data to '/output'
 RUN sed -i -e 's|^ROOT = os.getcwd()\s*$|ROOT = "/output"|g' lume-impact-live-demo.py
 # Create an output directories
-RUN mkdir -p /output/{plot,archive,output}
+RUN bash -c 'mkdir -p /output/{plot,archive,output}'
 
 # We need to define these 2 variable to allow 'mpirun' to be run as 'root'
 ENV OMPI_ALLOW_RUN_AS_ROOT 1
