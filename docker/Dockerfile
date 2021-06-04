@@ -47,6 +47,10 @@ RUN mkdir -p /output/{plot,archive,output}
 RUN sed -i -e 's|^ROOT = os.getcwd()\s*$|ROOT = "/output"|g' lume-impact-live-demo.py
 RUN sed -i -e 's|{PREFIX}.log|/output/{PREFIX}.log|g' lume-impact-live-demo.py
 
+# This should be or last working directory. The top level python script
+# looks for files relative to this path.
+WORKDIR /lume-impact-live-demo
+
 # Define the entrypoint. We use a script in order to run the command
 # under the 'lume-test' conda environment.
 COPY entrypoint.sh /entrypoint.sh
