@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   lume-test:
-    image: tidair/lume-impact-live-demo:v0.0.0
+    image: tidair/lume-impact-live-demo:latest
     container_name: lume-test
     tty: true
     stdin_open: true
