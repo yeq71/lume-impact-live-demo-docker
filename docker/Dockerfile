@@ -11,8 +11,6 @@ RUN DEBIAN_FRONTEND=noninteractive \
     python3 \
     python3-dev \
     python3-pip \
-    openmpi-bin \
-    libopenmpi-dev \
     gfortran \
     && rm -rf /var/lib/apt/lists/*
 
@@ -23,6 +21,15 @@ RUN wget https://github.com/Kitware/CMake/releases/download/v3.20.3/cmake-3.20.3
     tar -zxf cmake-3.20.3.tar.gz && \
     cd cmake-3.20.3 && \
     ./bootstrap && make && make install
+
+# Build openmpi from source
+RUN mkdir /usr/local/src/openmpi
+WORKDIR /usr/local/src/openmpi
+RUN wget https://download.open-mpi.org/release/open-mpi/v4.1/openmpi-4.1.1.tar.gz && \
+    tar -zxf openmpi-4.1.1.tar.gz && \
+    cd openmpi-4.1.1 && \
+    ./configure --prefix=/usr/local && make all install
+ENV LD_LIBRARY_PATH "/usr/local/lib:$LD_LIBRARY_PATH"
 
 # PIP Packages
 RUN pip3 install \
