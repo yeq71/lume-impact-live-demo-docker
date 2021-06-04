@@ -39,10 +39,13 @@ ENV EPICS_CA_SERVER_PORT "5068"
 ENV EPICS_TS_NTP_INET "134.79.48.11"
 ENV EPICS_IOC_LOG_INET "134.79.151.21"
 
-# Create an output directory and modify the top level python script to
-# write the output data there.
+# Create an output directory
 RUN mkdir -p /output/{plot,archive,output}
+
+# Patch the top level python script to write all the output data to the
+# output directory, instead of the current directory.
 RUN sed -i -e 's|^ROOT = os.getcwd()\s*$|ROOT = "/output"|g' lume-impact-live-demo.py
+RUN sed -i -e 's|{PREFIX}.log|/output/{PREFIX}.log|g' lume-impact-live-demo.py
 
 # Define the entrypoint. We use a script in order to run the command
 # under the 'lume-test' conda environment.
