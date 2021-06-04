@@ -82,8 +82,10 @@ WORKDIR lume-impact-live-demo
 RUN jupyter nbconvert --to script lume-impact-live-demo.ipynb && \
     jupyter nbconvert --to script make_dashboard.ipynb && \
     jupyter nbconvert --to script get_vcc_image.ipynb
-# Modify the top level python script to write the output data to '/output'
+# Patch the top level python script to write all the output data to the
+# output directory, instead of the current directory.
 RUN sed -i -e 's|^ROOT = os.getcwd()\s*$|ROOT = "/output"|g' lume-impact-live-demo.py
+RUN sed -i -e 's|{PREFIX}.log|/output/{PREFIX}.log|g' lume-impact-live-demo.py
 # Create an output directories
 RUN bash -c 'mkdir -p /output/{plot,archive,output}'
 
