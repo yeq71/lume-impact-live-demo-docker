@@ -105,5 +105,9 @@ ENV EPICS_CA_SERVER_PORT "5068"
 ENV EPICS_TS_NTP_INET "134.79.48.11"
 ENV EPICS_IOC_LOG_INET "134.79.151.21"
 
+# This should be or last working directory. The lume-impact-live-demo.py
+# looks for files relative to this path.
+WORKDIR /usr/local/src/lume-impact-live-demo
+
 # Define the entrypoint
 ENTRYPOINT ["python3", "/usr/local/src/lume-impact-live-demo/lume-impact-live-demo.py"]
