@@ -48,4 +48,6 @@ jobs:
           context: ./docker
           file: ./docker/Dockerfile
           push: true
-          tags: tidair/lume-impact-live-demo:${{ steps.get_tag.outputs.tag }}
+          tags: |
+            tidair/lume-impact-live-demo:${{ steps.get_tag.outputs.tag }}
+            tidair/lume-impact-live-demo:latest
